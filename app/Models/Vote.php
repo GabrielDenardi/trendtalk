@@ -6,8 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vote extends Model
 {
-    public function votable()
+    protected $fillable = ['value', 'post_id', 'user_id'];
+
+    public function post()
     {
-        return $this->morphTo();
+        return $this->belongsTo(Post::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

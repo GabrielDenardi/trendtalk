@@ -11,22 +11,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('votes', function (Blueprint $table) {
+        Schema::create('trending_topics', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('post_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->tinyInteger('value');
+            $table->string('word')->unique();
+            $table->integer('count')->default(0);
             $table->timestamps();
-
-            $table->unique(['post_id', 'user_id']);
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('votes');
+        Schema::dropIfExists('trending_topics');
     }
 };
